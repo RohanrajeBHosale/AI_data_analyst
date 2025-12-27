@@ -31,3 +31,42 @@ This is a local AI-powered data science tool that allows you to chat with messy 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
+### 2. Install Dependencies
+pip install streamlit pandas groq matplotlib seaborn openpyxl python-dotenv
+
+
+### 3. Get your API Key
+This project uses Groq for free, high-speed inference.
+Get your key at: console.groq.com
+
+
+## 📂 Project Structure
+app.py: The UI and file-loading logic.
+analyst.py: The reasoning layer (Language to Python).
+executor.py: The execution layer (Local Sandbox).
+prompts.py: System instructions.
+
+## 🖥️ Usage
+1.Run the App:
+```
+python3 -m streamlit run app.py
+```
+2.Enter your Groq API Key in the sidebar.
+3.Upload a file (CSV or XLSX).
+4.Ask a question:
+-"What is the total revenue by category?"
+-"Clean the sales column and show a trend line."
+
+## ⚠️ Security Note
+This application uses the Python exec() function. While powerful for personal analysis, never use this as a public-facing web application without a secure sandbox (like Docker) to prevent arbitrary code execution.
+
+## 🗺️ Roadmap
+
+Self-Healing Loop: Auto-fix code errors.
+
+Multi-File Support: Join multiple CSVs.
+
+Clean Data Export: Download the cleaned dataset.
+
+

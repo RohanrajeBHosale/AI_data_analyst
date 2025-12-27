@@ -1,64 +1,69 @@
+# 📊 Personal AI Data Analyst
 
-Here is a clean, professional README.md file designed for your project. You can save this text directly into a file named README.md in your project folder.
-📊 Personal AI Data Analyst
-Stop asking AI to do the math. Start asking AI to write the code.
-This project is a local-first AI data analysis tool. It solves the biggest problem with LLMs in data science: Hallucinations. Instead of asking an AI to calculate averages or trends (which it often gets wrong), this tool uses the AI as a "Senior Data Analyst" that writes precise Python code to perform the work on your local machine using Pandas and Matplotlib.
-🧠 The Philosophy
-Privacy First: Your raw data never leaves your machine. Only the column names and a small sample of types are sent to the AI.
-Accuracy: Calculations are performed by Python’s computational engine, not the LLM’s linguistic engine.
-Speed: Powered by Groq (Llama 3.3 70B) for near-instantaneous code generation.
-🚀 Features
-Messy Data Handling: Robust loading logic that automatically handles UnicodeDecodeError and hidden BOM characters from Excel exports.
-Natural Language to Code: Converts "Show me a bar chart of top 5 categories" into executable Pandas/Matplotlib logic.
-Local Execution: Runs code in a local environment, allowing for analysis of large files that would exceed LLM token limits.
-Automated Visualization: Automatically detects when a chart is requested and renders it within the UI.
-🛠️ Tech Stack
-Frontend: Streamlit
-Reasoning Engine: Groq API (Llama 3.3 70B Versatile)
-Data Processing: Pandas
-Visualization: Matplotlib & Seaborn
-⚙️ Installation & Setup
-1. Prerequisites
-Ensure you have Python 3.9+ installed.
-2. Clone and Initialize
-code
-Bash
-git clone https://github.com/yourusername/ai-data-analyst.git
-cd ai-data-analyst
-3. Set Up Virtual Environment
-code
-Bash
+**"Don't ask the AI to do the math. Ask the AI to write the code that does the math."**
+
+This is a local AI-powered data science tool that allows you to chat with messy CSV/Excel files. Instead of sending your entire dataset to a cloud LLM, this tool sends only the **metadata** (schema). The AI then reasons about your question, writes functional Python/Pandas code, and executes it locally on your machine to provide deterministic, accurate answers and visualizations.
+
+---
+
+## 🚀 Features
+
+- **Privacy-First Architecture:** Your raw data stays on your machine. Only column names and sample types are sent to the LLM.
+- **Deterministic Accuracy:** Leverages the computational precision of Pandas and Matplotlib rather than relying on LLM "hallucinated" calculations.
+- **Robust Data Ingestion:** Automatically handles common encoding issues (`UnicodeDecodeError`) and hidden BOM characters from Excel.
+- **Interactive Visualizations:** Generates charts (Matplotlib/Seaborn) based on natural language requests.
+- **Ultra-Fast Inference:** Powered by **Groq** (Llama 3.3 70B) for near-instant code generation.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** [Streamlit](https://streamlit.io/)
+- **Intelligence:** [Groq](https://groq.com/) (Llama 3.3 70B Versatile)
+- **Data Engine:** [Pandas](https://pandas.pydata.org/)
+- **Visuals:** [Matplotlib](https://matplotlib.org/) / [Seaborn](https://seaborn.pydata.org/)
+
+---
+
+## ⚙️ Setup & Installation
+
+### 1. Create a Virtual Environment
+```bash
 python3 -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-4. Install Dependencies
+source .venv/bin/activate  # Mac/Linux
+# .venv\Scripts\activate   # Windows
+```
+
+2. Install Dependencies
 code
 Bash
 pip install streamlit pandas groq matplotlib seaborn openpyxl python-dotenv
+3. Get your API Key
+This project is configured to use Groq for free, high-speed inference.
+Get your free key at: console.groq.com
 📂 Project Structure
-app.py: The main UI, file uploader, and robust data loading logic.
-analyst.py: The brain. Formats the data metadata and communicates with the Groq API.
-executor.py: The sandbox. Safely executes AI-generated code and captures outputs/charts.
-prompts.py: System prompts that enforce strict "Python-only" output from the AI.
+app.py: The Streamlit UI and robust file-loading logic.
+analyst.py: The "Reasoning" layer that converts natural language to Python via Groq.
+executor.py: The "Execution" layer that runs generated code in a local sandbox.
+prompts.py: The system instructions that enforce strict Python-only output.
 🖥️ Usage
-Launch the app:
+Run the App:
 code
 Bash
-streamlit run app.py
-Configuration: Enter your Groq API Key in the sidebar.
-Upload: Drop in any CSV or Excel file (even messy ones!).
-Query: Ask questions like:
-"What are the top 5 products by revenue?"
-"Clean the Sales column by removing dollar signs and commas, then show a trend line."
-"Identify outliers in the price column using z-score."
-🛡️ Security Note
-This application uses Python's exec() function to run AI-generated code locally.
-Personal Use: Safe for local data analysis on your own machine.
-Production: Do not host this as a public web application without implementing a secure sandbox (like E2B, Pyodide, or Docker containers) to prevent malicious code execution.
+python3 -m streamlit run app.py
+Enter your Groq API Key in the sidebar.
+Upload a file (CSV or XLSX).
+Ask a question:
+"What is the total revenue by category?"
+"Clean the sales column (remove $ and commas) and show a trend line."
+"Who are the top 5 customers by order volume?"
+⚠️ Security Note
+This application uses the Python exec() function to run AI-generated code. While this is powerful for personal data analysis, never use this as a public-facing web application without implementing a secure sandbox (like Docker or E2B) to prevent arbitrary code execution.
 🗺️ Roadmap
 
-Self-Healing Loop: If the code fails, the error is sent back to the AI for an automatic fix.
+Self-Healing Loop: Automatically send errors back to the AI for a second attempt.
 
-Multi-File Chat: Support for merging and analyzing multiple CSVs at once.
+Multi-File Support: Join multiple CSVs for complex relational analysis.
 
 Clean Data Export: One-click button to download the dataset after the AI cleans it.
-Built to make data science accessible through the power of Code-as-Action.
+Built with ❤️ using Streamlit, Pandas, and Groq.
